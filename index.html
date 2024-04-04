@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Pokemon</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="script" href="script.js">
+  </head>
+  <body class="body">
+    
+    <div id="pokedex">
+        <div id="left">
+          <div id="logo"></div>
+          <div id="bg_curve1_left"></div>
+          <div id="bg_curve2_left"></div>
+          <div id="curve1_left">
+            <div id="buttonGlass">
+              <div id="reflect"> </div>
+            </div>
+            <div id="miniButtonGlass1"></div>
+            <div id="miniButtonGlass2"></div>
+            <div id="miniButtonGlass3"></div>
+          </div>
+          <div id="curve2_left">
+            <div id="junction">
+              <div id="junction1"></div>
+              <div id="junction2"></div>
+            </div>
+          </div>
+          <div id="screen">
+            <div id="topPicture">
+              <div id="buttontopPicture1"></div>
+              <div id="buttontopPicture2"></div>
+            </div>
+            <div id="picture">
+              <img src="https://media.licdn.com/dms/image/C5603AQGozL86bNaekQ/profile-displayphoto-shrink_200_200/0/1660692606277?e=1715817600&v=beta&t=4P3Pob2bTVkortO24xh06XqxJtS2p-J3rQ3i4vSYtis" alt="hadeel" height="170" />
+            </div>
+            <div id="buttonbottomPicture"></div>
+            <div id="speakers">
+              <div class="sp"></div>
+              <div class="sp"></div>
+              <div class="sp"></div>
+              <div class="sp"></div>
+            </div>
+          </div>
+          <div id="bigbluebutton"></div>
+          <div id="barbutton1"></div>
+          <div id="barbutton2"></div>
+          <div id="cross">
+            <div id="leftcross">
+              <div id="leftT"></div>
+            </div>
+            <div id="topcross">
+              <div id="upT"></div>
+            </div>
+            <div id="rightcross">
+              <div id="rightT"></div>
+            </div>
+            <div id="midcross">
+              <div id="midCircle"></div>
+            </div>
+            <div id="botcross">
+              <div id="downT"></div>
+            </div>
+          </div>
+        </div>
+        <div id="right">
+          <div id="stats">
+            <strong>Name:</strong> pokemon<br/>
+            <strong>Type:</strong> Water<br/>
+            <strong>Height:</strong> 6"7<br/>
+            <strong>Weight:</strong> 43.3 lbs.<br/><br/>
+            <strong>The best pokemon ever</strong><br/>
+            has the ultra mega pokemon move and can win every battle
+          </div>
+          <div id="blueButtons1">
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+          </div>
+          <div id="blueButtons2">
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+          </div>
+          <div id="miniButtonGlass4"></div>
+          <div id="miniButtonGlass5"></div>
+          <div id="barbutton3"></div>
+          <div id="barbutton4"></div>
+          <div id="yellowBox1"></div>
+          <div id="yellowBox2"></div>
+          <div id="bg_curve1_right"></div>
+          <div id="bg_curve2_right"></div>
+          <div id="curve1_right"></div>
+          <div id="curve2_right"></div>
+        </div>
+
+        <div id="value_boxes_invis">Invisible Div!</p></div>
+        <div id="value_boxes_invis">Invisible Div!</p></div>
+        <div id="value_boxes_invis">Invisible Div!</p></div>
+        <div id="value_boxes_invis">Invisible Div!</p></div>
+        <div id="value_boxes">
+          <form action="" method="post">
+            <label for="pokemonName">Pokémon Name:</label>
+            <input type="text" id="pokemonName" name="pokemonName" placeholder="Pikachu..."><br>
+
+            <label for="pokemonDescription">Pokémon Description:</label>
+            <input type="text" id="pokemonDescription" name="pokemonDescription" placeholder="Electric mouse..."><br>
+
+            <label for="region">Region:</label>
+            <select id="region" >
+            </select><br>
+          
+            <label for="type">Primary Type:</label>
+            <select id="type">
+              <!-- Add more types as necessary -->
+            </select><br>
+          
+            <label for="type_secondary">Secondary Type:</label>
+            <select id="type_secondary">
+              <!-- Add more types as necessary -->
+            </select><br>
+
+            
+          
+            <input type="submit" value="Submit">
+          </form>       
+      </div>
+
+
+  </body>
+  
+</html>
+
+<script>
+  window.onload = function() {
+
+
+    fetch('/regions')
+      .then(response => response.json())
+      .then(data => {
+        const regionDropdown = document.getElementById('region');
+        data.forEach(region => {
+          const optionElement = document.createElement('option');
+          optionElement.value = region.region_id;
+          optionElement.textContent = region.region_name;
+          regionDropdown.appendChild(optionElement);
+        });
+      })
+      .catch(error => console.error('Error fetching regions:', error));
+
+      
+    fetch('/p_types')
+      .then(response => response.json())
+      .then(data => {
+        const typeDropdown = document.getElementById('type');
+        data.forEach(type => {
+          const optionElement = document.createElement('option');
+          optionElement.value = type.type_id;
+          optionElement.textContent = type.type_name;
+          typeDropdown.appendChild(optionElement);
+        });
+      })
+      .catch(error => console.error('Error fetching types:', error));
+
+      fetch('/p_types')
+      .then(response => response.json())
+      .then(data => {
+        const typeDropdown = document.getElementById('type_secondary');
+        data.forEach(type => {
+          const optionElement = document.createElement('option');
+          optionElement.value = type.type_id;
+          optionElement.textContent = type.type_name;
+          typeDropdown.appendChild(optionElement);
+        });
+      })
+      .catch(error => console.error('Error fetching types:', error));
+  };
+</script>
+
+
+
